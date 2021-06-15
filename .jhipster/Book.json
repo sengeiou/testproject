@@ -1,0 +1,38 @@
+{
+  "name": "Book",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "created",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "actor",
+      "otherEntityRelationshipName": "book",
+      "relationshipName": "actor",
+      "ownerSide": false
+    }
+  ],
+  "entityTableName": "book",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": ["testProject"],
+  "searchEngine": "elasticsearch",
+  "changelogDate": "20210610194923"
+}

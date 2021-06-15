@@ -1,0 +1,57 @@
+{
+  "name": "Actor",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "firstName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "AddressType",
+      "fieldValues": "DEFAULT,HOME,BUSINESS"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "book",
+      "otherEntityRelationshipName": "actor",
+      "relationshipName": "book",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "dog",
+      "otherEntityRelationshipName": "actor",
+      "relationshipName": "dog",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "echo",
+      "otherEntityRelationshipName": "actor",
+      "relationshipName": "echo",
+      "otherEntityField": "name",
+      "ownerSide": true
+    }
+  ],
+  "entityTableName": "actor",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": ["testProject"],
+  "searchEngine": "elasticsearch",
+  "changelogDate": "20210610194823"
+}

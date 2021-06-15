@@ -1,0 +1,44 @@
+{
+  "name": "Dog",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "created",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "card",
+      "otherEntityRelationshipName": "dog",
+      "relationshipName": "card",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "actor",
+      "otherEntityRelationshipName": "dog",
+      "relationshipName": "actor",
+      "otherEntityField": "name"
+    }
+  ],
+  "entityTableName": "dog",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": ["testProject"],
+  "searchEngine": "elasticsearch",
+  "changelogDate": "20210610195123"
+}

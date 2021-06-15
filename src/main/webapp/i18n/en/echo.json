@@ -1,0 +1,28 @@
+{
+  "testProjectApp": {
+    "echo": {
+      "home": {
+        "title": "Echoes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Echo",
+        "createOrEditLabel": "Create or edit a Echo",
+        "search": "Search for Echo",
+        "notFound": "No Echoes found"
+      },
+      "created": "A new Echo is created with identifier {{ param }}",
+      "updated": "A Echo is updated with identifier {{ param }}",
+      "deleted": "A Echo is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Echo {{ id }}?"
+      },
+      "detail": {
+        "title": "Echo"
+      },
+      "id": "ID",
+      "name": "Name",
+      "description": "Description",
+      "created": "Created",
+      "actor": "Actor"
+    }
+  }
+}

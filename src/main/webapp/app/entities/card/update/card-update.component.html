@@ -1,0 +1,94 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-card-heading" data-cy="CardCreateUpdateHeading" jhiTranslate="testProjectApp.card.home.createOrEditLabel">
+        Create or edit a Card
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="testProjectApp.card.name" for="field_name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+          <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="testProjectApp.card.title" for="field_title">Title</label>
+          <input type="text" class="form-control" name="title" id="field_title" data-cy="title" formControlName="title" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="testProjectApp.card.date" for="field_date">Date</label>
+          <div class="input-group">
+            <input
+              id="field_date"
+              data-cy="date"
+              type="text"
+              class="form-control"
+              name="date"
+              ngbDatepicker
+              #dateDp="ngbDatepicker"
+              formControlName="date"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="dateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="testProjectApp.card.type" for="field_type">Type</label>
+          <select class="form-control" name="type" formControlName="type" id="field_type" data-cy="type">
+            <option [ngValue]="null">{{ 'testProjectApp.CustomerType.null' | translate }}</option>
+            <option value="DEFAULT">{{ 'testProjectApp.CustomerType.DEFAULT' | translate }}</option>
+            <option value="REGULAR">{{ 'testProjectApp.CustomerType.REGULAR' | translate }}</option>
+            <option value="ARTIST">{{ 'testProjectApp.CustomerType.ARTIST' | translate }}</option>
+            <option value="DESIGNER">{{ 'testProjectApp.CustomerType.DESIGNER' | translate }}</option>
+            <option value="CORPORATE">{{ 'testProjectApp.CustomerType.CORPORATE' | translate }}</option>
+            <option value="ADMIN">{{ 'testProjectApp.CustomerType.ADMIN' | translate }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="testProjectApp.card.dog" for="field_dog">Dog</label>
+          <select class="form-control" id="field_dog" data-cy="dog" name="dog" formControlName="dog">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="dogOption.id === editForm.get('dog')!.value?.id ? editForm.get('dog')!.value : dogOption"
+              *ngFor="let dogOption of dogsSharedCollection; trackBy: trackDogById"
+            >
+              {{ dogOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

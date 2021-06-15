@@ -1,0 +1,10 @@
+{
+  "testProjectApp": {
+    "AddressType": {
+      "null": "",
+      "DEFAULT": "DEFAULT",
+      "HOME": "HOME",
+      "BUSINESS": "BUSINESS"
+    }
+  }
+}

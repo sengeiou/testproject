@@ -1,0 +1,29 @@
+{
+  "testProjectApp": {
+    "dog": {
+      "home": {
+        "title": "Dogs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Dog",
+        "createOrEditLabel": "Create or edit a Dog",
+        "search": "Search for Dog",
+        "notFound": "No Dogs found"
+      },
+      "created": "A new Dog is created with identifier {{ param }}",
+      "updated": "A Dog is updated with identifier {{ param }}",
+      "deleted": "A Dog is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Dog {{ id }}?"
+      },
+      "detail": {
+        "title": "Dog"
+      },
+      "id": "ID",
+      "name": "Name",
+      "description": "Description",
+      "created": "Created",
+      "card": "Card",
+      "actor": "Actor"
+    }
+  }
+}

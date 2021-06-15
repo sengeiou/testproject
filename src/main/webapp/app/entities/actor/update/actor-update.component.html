@@ -1,0 +1,84 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-actor-heading" data-cy="ActorCreateUpdateHeading" jhiTranslate="testProjectApp.actor.home.createOrEditLabel">
+        Create or edit a Actor
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="testProjectApp.actor.name" for="field_name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="testProjectApp.actor.firstName" for="field_firstName">First Name</label>
+          <input type="text" class="form-control" name="firstName" id="field_firstName" data-cy="firstName" formControlName="firstName" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="testProjectApp.actor.lastName" for="field_lastName">Last Name</label>
+          <input type="text" class="form-control" name="lastName" id="field_lastName" data-cy="lastName" formControlName="lastName" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="testProjectApp.actor.type" for="field_type">Type</label>
+          <select class="form-control" name="type" formControlName="type" id="field_type" data-cy="type">
+            <option [ngValue]="null">{{ 'testProjectApp.AddressType.null' | translate }}</option>
+            <option value="DEFAULT">{{ 'testProjectApp.AddressType.DEFAULT' | translate }}</option>
+            <option value="HOME">{{ 'testProjectApp.AddressType.HOME' | translate }}</option>
+            <option value="BUSINESS">{{ 'testProjectApp.AddressType.BUSINESS' | translate }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="testProjectApp.actor.book" for="field_book">Book</label>
+          <select class="form-control" id="field_book" data-cy="book" name="book" formControlName="book">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="bookOption.id === editForm.get('book')!.value?.id ? editForm.get('book')!.value : bookOption"
+              *ngFor="let bookOption of booksCollection; trackBy: trackBookById"
+            >
+              {{ bookOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label jhiTranslate="testProjectApp.actor.echo" for="field_echoes">Echo</label>
+          <select class="form-control" id="field_echoes" data-cy="echo" multiple name="echoes" formControlName="echoes">
+            <option
+              [ngValue]="getSelectedEcho(echoOption, editForm.get('echoes')!.value)"
+              *ngFor="let echoOption of echoesSharedCollection; trackBy: trackEchoById"
+            >
+              {{ echoOption.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
