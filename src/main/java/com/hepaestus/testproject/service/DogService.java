@@ -93,6 +93,20 @@ public class DogService {
     }
 
     /**
+     *  Get all the dogs where Author is {@code null}.
+     *  @return the list of entities.
+     */
+    @Transactional(readOnly = true)
+    public List<DogDTO> findAllWhereAuthorIsNull() {
+        log.debug("Request to get all dogs where Author is null");
+        return StreamSupport
+            .stream(dogRepository.findAll().spliterator(), false)
+            .filter(dog -> dog.getAuthor() == null)
+            .map(dogMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    /**
      * Get one dog by id.
      *
      * @param id the id of the entity.

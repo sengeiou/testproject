@@ -7,13 +7,16 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity {@link Dog} and its DTO {@link DogDTO}.
  */
-@Mapper(componentModel = "spring", uses = { ActorMapper.class })
+@Mapper(componentModel = "spring", uses = {})
 public interface DogMapper extends EntityMapper<DogDTO, Dog> {
-    @Mapping(target = "actor", source = "actor", qualifiedByName = "name")
-    DogDTO toDto(Dog s);
-
     @Named("id")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
     DogDTO toDtoId(Dog dog);
+
+    @Named("name")
+    @BeanMapping(ignoreByDefault = true)
+    @Mapping(target = "id", source = "id")
+    @Mapping(target = "name", source = "name")
+    DogDTO toDtoName(Dog dog);
 }

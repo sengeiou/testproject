@@ -10,9 +10,8 @@ import org.mapstruct.*;
  */
 @Mapper(componentModel = "spring", uses = {})
 public interface EchoMapper extends EntityMapper<EchoDTO, Echo> {
-    @Named("nameSet")
+    @Named("idSet")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
-    @Mapping(target = "name", source = "name")
-    Set<EchoDTO> toDtoNameSet(Set<Echo> echo);
+    Set<EchoDTO> toDtoIdSet(Set<Echo> echo);
 }

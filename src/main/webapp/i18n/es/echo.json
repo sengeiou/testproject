@@ -1,5 +1,5 @@
 {
-  "testProjectApp": {
+  "testprojectApp": {
     "echo": {
       "home": {
         "title": "Echoes",
@@ -22,7 +22,7 @@
       "name": "Name",
       "description": "Description",
       "created": "Created",
-      "actor": "Actor"
+      "author": "Author"
     }
   }
 }

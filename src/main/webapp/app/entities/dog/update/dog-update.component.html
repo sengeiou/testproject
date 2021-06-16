@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
   <div class="col-8">
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2 id="jhi-dog-heading" data-cy="DogCreateUpdateHeading" jhiTranslate="testProjectApp.dog.home.createOrEditLabel">
+      <h2 id="jhi-dog-heading" data-cy="DogCreateUpdateHeading" jhiTranslate="testprojectApp.dog.home.createOrEditLabel">
         Create or edit a Dog
       </h2>
 
@@ -14,12 +14,17 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" jhiTranslate="testProjectApp.dog.name" for="field_name">Name</label>
+          <label class="form-control-label" jhiTranslate="testprojectApp.dog.name" for="field_name">Name</label>
           <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+          <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" jhiTranslate="testProjectApp.dog.description" for="field_description">Description</label>
+          <label class="form-control-label" jhiTranslate="testprojectApp.dog.description" for="field_description">Description</label>
           <input
             type="text"
             class="form-control"
@@ -31,7 +36,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" jhiTranslate="testProjectApp.dog.created" for="field_created">Created</label>
+          <label class="form-control-label" jhiTranslate="testprojectApp.dog.created" for="field_created">Created</label>
           <div class="input-group">
             <input
               id="field_created"
@@ -47,19 +52,6 @@
               <button type="button" class="btn btn-secondary" (click)="createdDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
             </span>
           </div>
-        </div>
-
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="testProjectApp.dog.actor" for="field_actor">Actor</label>
-          <select class="form-control" id="field_actor" data-cy="actor" name="actor" formControlName="actor">
-            <option [ngValue]="null"></option>
-            <option
-              [ngValue]="actorOption.id === editForm.get('actor')!.value?.id ? editForm.get('actor')!.value : actorOption"
-              *ngFor="let actorOption of actorsSharedCollection; trackBy: trackActorById"
-            >
-              {{ actorOption.name }}
-            </option>
-          </select>
         </div>
       </div>
 

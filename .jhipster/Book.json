@@ -17,11 +17,11 @@
   ],
   "relationships": [
     {
-      "relationshipType": "one-to-one",
-      "otherEntityName": "actor",
+      "relationshipType": "many-to-one",
+      "otherEntityName": "author",
       "otherEntityRelationshipName": "book",
-      "relationshipName": "actor",
-      "ownerSide": false
+      "relationshipName": "author",
+      "otherEntityField": "name"
     }
   ],
   "entityTableName": "book",
@@ -32,7 +32,7 @@
   "fluentMethods": true,
   "readOnly": false,
   "embedded": false,
-  "applications": ["testProject"],
+  "applications": ["testproject"],
   "searchEngine": "elasticsearch",
   "changelogDate": "20210610194923"
 }

@@ -1,11 +1,11 @@
 <div>
   <h2 id="page-heading" data-cy="DogHeading">
-    <span jhiTranslate="testProjectApp.dog.home.title">Dogs</span>
+    <span jhiTranslate="testprojectApp.dog.home.title">Dogs</span>
 
     <div class="d-flex justify-content-end">
       <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-        <span jhiTranslate="testProjectApp.dog.home.refreshListLabel">Refresh List</span>
+        <span jhiTranslate="testprojectApp.dog.home.refreshListLabel">Refresh List</span>
       </button>
 
       <button
@@ -15,7 +15,7 @@
         [routerLink]="['/dog/new']"
       >
         <fa-icon icon="plus"></fa-icon>
-        <span class="hidden-sm-down" jhiTranslate="testProjectApp.dog.home.createLabel"> Create a new Dog </span>
+        <span class="hidden-sm-down" jhiTranslate="testprojectApp.dog.home.createLabel"> Create a new Dog </span>
       </button>
     </div>
   </h2>
@@ -34,7 +34,7 @@
             [(ngModel)]="currentSearch"
             id="currentSearch"
             name="currentSearch"
-            placeholder="{{ 'testProjectApp.dog.home.search' | translate }}"
+            placeholder="{{ 'testprojectApp.dog.home.search' | translate }}"
           />
 
           <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
@@ -50,7 +50,7 @@
   </div>
 
   <div class="alert alert-warning" id="no-result" *ngIf="dogs?.length === 0">
-    <span jhiTranslate="testProjectApp.dog.home.notFound">No dogs found</span>
+    <span jhiTranslate="testprojectApp.dog.home.notFound">No dogs found</span>
   </div>
 
   <div class="table-responsive" id="entities" *ngIf="dogs && dogs.length > 0">
@@ -58,10 +58,9 @@
       <thead>
         <tr>
           <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
-          <th scope="col"><span jhiTranslate="testProjectApp.dog.name">Name</span></th>
-          <th scope="col"><span jhiTranslate="testProjectApp.dog.description">Description</span></th>
-          <th scope="col"><span jhiTranslate="testProjectApp.dog.created">Created</span></th>
-          <th scope="col"><span jhiTranslate="testProjectApp.dog.actor">Actor</span></th>
+          <th scope="col"><span jhiTranslate="testprojectApp.dog.name">Name</span></th>
+          <th scope="col"><span jhiTranslate="testprojectApp.dog.description">Description</span></th>
+          <th scope="col"><span jhiTranslate="testprojectApp.dog.created">Created</span></th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -73,11 +72,6 @@
           <td>{{ dog.name }}</td>
           <td>{{ dog.description }}</td>
           <td>{{ dog.created | formatMediumDate }}</td>
-          <td>
-            <div *ngIf="dog.actor">
-              <a [routerLink]="['/actor', dog.actor?.id, 'view']">{{ dog.actor?.name }}</a>
-            </div>
-          </td>
           <td class="text-right">
             <div class="btn-group">
               <button type="submit" [routerLink]="['/dog', dog.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">

@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
   <div class="col-8">
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2 id="jhi-echo-heading" data-cy="EchoCreateUpdateHeading" jhiTranslate="testProjectApp.echo.home.createOrEditLabel">
+      <h2 id="jhi-echo-heading" data-cy="EchoCreateUpdateHeading" jhiTranslate="testprojectApp.echo.home.createOrEditLabel">
         Create or edit a Echo
       </h2>
 
@@ -14,12 +14,17 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" jhiTranslate="testProjectApp.echo.name" for="field_name">Name</label>
+          <label class="form-control-label" jhiTranslate="testprojectApp.echo.name" for="field_name">Name</label>
           <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+          <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" jhiTranslate="testProjectApp.echo.description" for="field_description">Description</label>
+          <label class="form-control-label" jhiTranslate="testprojectApp.echo.description" for="field_description">Description</label>
           <input
             type="text"
             class="form-control"
@@ -31,7 +36,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" jhiTranslate="testProjectApp.echo.created" for="field_created">Created</label>
+          <label class="form-control-label" jhiTranslate="testprojectApp.echo.created" for="field_created">Created</label>
           <div class="input-group">
             <input
               id="field_created"

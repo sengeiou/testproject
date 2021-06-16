@@ -1,11 +1,11 @@
 <div>
   <h2 id="page-heading" data-cy="EchoHeading">
-    <span jhiTranslate="testProjectApp.echo.home.title">Echoes</span>
+    <span jhiTranslate="testprojectApp.echo.home.title">Echoes</span>
 
     <div class="d-flex justify-content-end">
       <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-        <span jhiTranslate="testProjectApp.echo.home.refreshListLabel">Refresh List</span>
+        <span jhiTranslate="testprojectApp.echo.home.refreshListLabel">Refresh List</span>
       </button>
 
       <button
@@ -15,7 +15,7 @@
         [routerLink]="['/echo/new']"
       >
         <fa-icon icon="plus"></fa-icon>
-        <span class="hidden-sm-down" jhiTranslate="testProjectApp.echo.home.createLabel"> Create a new Echo </span>
+        <span class="hidden-sm-down" jhiTranslate="testprojectApp.echo.home.createLabel"> Create a new Echo </span>
       </button>
     </div>
   </h2>
@@ -34,7 +34,7 @@
             [(ngModel)]="currentSearch"
             id="currentSearch"
             name="currentSearch"
-            placeholder="{{ 'testProjectApp.echo.home.search' | translate }}"
+            placeholder="{{ 'testprojectApp.echo.home.search' | translate }}"
           />
 
           <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
@@ -50,7 +50,7 @@
   </div>
 
   <div class="alert alert-warning" id="no-result" *ngIf="echoes?.length === 0">
-    <span jhiTranslate="testProjectApp.echo.home.notFound">No echoes found</span>
+    <span jhiTranslate="testprojectApp.echo.home.notFound">No echoes found</span>
   </div>
 
   <div class="table-responsive" id="entities" *ngIf="echoes && echoes.length > 0">
@@ -58,9 +58,9 @@
       <thead>
         <tr>
           <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
-          <th scope="col"><span jhiTranslate="testProjectApp.echo.name">Name</span></th>
-          <th scope="col"><span jhiTranslate="testProjectApp.echo.description">Description</span></th>
-          <th scope="col"><span jhiTranslate="testProjectApp.echo.created">Created</span></th>
+          <th scope="col"><span jhiTranslate="testprojectApp.echo.name">Name</span></th>
+          <th scope="col"><span jhiTranslate="testprojectApp.echo.description">Description</span></th>
+          <th scope="col"><span jhiTranslate="testprojectApp.echo.created">Created</span></th>
           <th scope="col"></th>
         </tr>
       </thead>

@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
   <div class="col-8">
     <div *ngIf="dog">
-      <h2 data-cy="dogDetailsHeading"><span jhiTranslate="testProjectApp.dog.detail.title">Dog</span></h2>
+      <h2 data-cy="dogDetailsHeading"><span jhiTranslate="testprojectApp.dog.detail.title">Dog</span></h2>
 
       <hr />
 
@@ -14,26 +14,20 @@
         <dd>
           <span>{{ dog.id }}</span>
         </dd>
-        <dt><span jhiTranslate="testProjectApp.dog.name">Name</span></dt>
+        <dt><span jhiTranslate="testprojectApp.dog.name">Name</span></dt>
         <dd>
           <span>{{ dog.name }}</span>
         </dd>
-        <dt><span jhiTranslate="testProjectApp.dog.description">Description</span></dt>
+        <dt><span jhiTranslate="testprojectApp.dog.description">Description</span></dt>
         <dd>
           <span>{{ dog.description }}</span>
         </dd>
-        <dt><span jhiTranslate="testProjectApp.dog.created">Created</span></dt>
+        <dt><span jhiTranslate="testprojectApp.dog.created">Created</span></dt>
         <dd>
           <span>{{ dog.created | formatMediumDate }}</span>
         </dd>
-        <dt><span jhiTranslate="testProjectApp.dog.actor">Actor</span></dt>
-        <dd>
-          <div *ngIf="dog.actor">
-            <a [routerLink]="['/actor', dog.actor?.id, 'view']">{{ dog.actor?.name }}</a>
-          </div>
-        </dd>
       </dl>
-
+      <pre>{{ dog | json }}</pre>
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
       </button>

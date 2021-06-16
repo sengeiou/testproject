@@ -9,8 +9,6 @@ import { of, Subject } from 'rxjs';
 
 import { DogService } from '../service/dog.service';
 import { IDog, Dog } from '../dog.model';
-import { IActor } from 'app/entities/actor/actor.model';
-import { ActorService } from 'app/entities/actor/service/actor.service';
 
 import { DogUpdateComponent } from './dog-update.component';
 
@@ -20,7 +18,6 @@ describe('Component Tests', () => {
     let fixture: ComponentFixture<DogUpdateComponent>;
     let activatedRoute: ActivatedRoute;
     let dogService: DogService;
-    let actorService: ActorService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
@@ -34,41 +31,18 @@ describe('Component Tests', () => {
       fixture = TestBed.createComponent(DogUpdateComponent);
       activatedRoute = TestBed.inject(ActivatedRoute);
       dogService = TestBed.inject(DogService);
-      actorService = TestBed.inject(ActorService);
 
       comp = fixture.componentInstance;
     });
 
     describe('ngOnInit', () => {
-      it('Should call Actor query and add missing value', () => {
-        const dog: IDog = { id: 456 };
-        const actor: IActor = { id: 89601 };
-        dog.actor = actor;
-
-        const actorCollection: IActor[] = [{ id: 15324 }];
-        spyOn(actorService, 'query').and.returnValue(of(new HttpResponse({ body: actorCollection })));
-        const additionalActors = [actor];
-        const expectedCollection: IActor[] = [...additionalActors, ...actorCollection];
-        spyOn(actorService, 'addActorToCollectionIfMissing').and.returnValue(expectedCollection);
-
-        activatedRoute.data = of({ dog });
-        comp.ngOnInit();
-
-        expect(actorService.query).toHaveBeenCalled();
-        expect(actorService.addActorToCollectionIfMissing).toHaveBeenCalledWith(actorCollection, ...additionalActors);
-        expect(comp.actorsSharedCollection).toEqual(expectedCollection);
-      });
-
       it('Should update editForm', () => {
         const dog: IDog = { id: 456 };
-        const actor: IActor = { id: 83996 };
-        dog.actor = actor;
 
         activatedRoute.data = of({ dog });
         comp.ngOnInit();
 
         expect(comp.editForm.value).toEqual(expect.objectContaining(dog));
-        expect(comp.actorsSharedCollection).toContain(actor);
       });
     });
 
@@ -133,16 +107,6 @@ describe('Component Tests', () => {
         expect(dogService.update).toHaveBeenCalledWith(dog);
         expect(comp.isSaving).toEqual(false);
         expect(comp.previousState).not.toHaveBeenCalled();
-      });
-    });
-
-    describe('Tracking relationships identifiers', () => {
-      describe('trackActorById', () => {
-        it('Should return tracked Actor primary key', () => {
-          const entity = { id: 123 };
-          const trackResult = comp.trackActorById(0, entity);
-          expect(trackResult).toEqual(entity.id);
-        });
       });
     });
   });

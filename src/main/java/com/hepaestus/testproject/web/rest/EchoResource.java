@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -51,7 +53,7 @@ public class EchoResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/echoes")
-    public ResponseEntity<EchoDTO> createEcho(@RequestBody EchoDTO echoDTO) throws URISyntaxException {
+    public ResponseEntity<EchoDTO> createEcho(@Valid @RequestBody EchoDTO echoDTO) throws URISyntaxException {
         log.debug("REST request to save Echo : {}", echoDTO);
         if (echoDTO.getId() != null) {
             throw new BadRequestAlertException("A new echo cannot already have an ID", ENTITY_NAME, "idexists");
@@ -74,8 +76,10 @@ public class EchoResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/echoes/{id}")
-    public ResponseEntity<EchoDTO> updateEcho(@PathVariable(value = "id", required = false) final Long id, @RequestBody EchoDTO echoDTO)
-        throws URISyntaxException {
+    public ResponseEntity<EchoDTO> updateEcho(
+        @PathVariable(value = "id", required = false) final Long id,
+        @Valid @RequestBody EchoDTO echoDTO
+    ) throws URISyntaxException {
         log.debug("REST request to update Echo : {}, {}", id, echoDTO);
         if (echoDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
@@ -109,7 +113,7 @@ public class EchoResource {
     @PatchMapping(value = "/echoes/{id}", consumes = "application/merge-patch+json")
     public ResponseEntity<EchoDTO> partialUpdateEcho(
         @PathVariable(value = "id", required = false) final Long id,
-        @RequestBody EchoDTO echoDTO
+        @NotNull @RequestBody EchoDTO echoDTO
     ) throws URISyntaxException {
         log.debug("REST request to partial update Echo partially : {}, {}", id, echoDTO);
         if (echoDTO.getId() == null) {

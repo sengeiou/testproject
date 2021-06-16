@@ -19,6 +19,8 @@ public class BookDTO implements Serializable {
 
     private String description;
 
+    private AuthorDTO author;
+
     public Long getId() {
         return id;
     }
@@ -51,6 +53,14 @@ public class BookDTO implements Serializable {
         this.description = description;
     }
 
+    public AuthorDTO getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(AuthorDTO author) {
+        this.author = author;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -80,6 +90,7 @@ public class BookDTO implements Serializable {
             ", name='" + getName() + "'" +
             ", created='" + getCreated() + "'" +
             ", description='" + getDescription() + "'" +
+            ", author=" + getAuthor() +
             "}";
     }
 }

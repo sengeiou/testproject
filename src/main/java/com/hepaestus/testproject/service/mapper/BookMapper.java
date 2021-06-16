@@ -7,10 +7,8 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity {@link Book} and its DTO {@link BookDTO}.
  */
-@Mapper(componentModel = "spring", uses = {})
+@Mapper(componentModel = "spring", uses = { AuthorMapper.class })
 public interface BookMapper extends EntityMapper<BookDTO, Book> {
-    @Named("id")
-    @BeanMapping(ignoreByDefault = true)
-    @Mapping(target = "id", source = "id")
-    BookDTO toDtoId(Book book);
+    @Mapping(target = "author", source = "author", qualifiedByName = "name")
+    BookDTO toDto(Book s);
 }

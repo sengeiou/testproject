@@ -1,24 +1,24 @@
 import * as dayjs from 'dayjs';
-import { ICard } from 'app/entities/card/card.model';
-import { IActor } from 'app/entities/actor/actor.model';
+import { ICar } from 'app/entities/car/car.model';
+import { IAuthor } from 'app/entities/author/author.model';
 
 export interface IDog {
   id?: number;
-  name?: string | null;
+  name?: string;
   description?: string | null;
   created?: dayjs.Dayjs | null;
-  cards?: ICard[] | null;
-  actor?: IActor | null;
+  cards?: ICar[] | null;
+  author?: IAuthor | null;
 }
 
 export class Dog implements IDog {
   constructor(
     public id?: number,
-    public name?: string | null,
+    public name?: string,
     public description?: string | null,
     public created?: dayjs.Dayjs | null,
-    public cards?: ICard[] | null,
-    public actor?: IActor | null
+    public cards?: ICar[] | null,
+    public author?: IAuthor | null
   ) {}
 }
 

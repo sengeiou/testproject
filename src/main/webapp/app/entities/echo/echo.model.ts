@@ -1,21 +1,21 @@
 import * as dayjs from 'dayjs';
-import { IActor } from 'app/entities/actor/actor.model';
+import { IAuthor } from 'app/entities/author/author.model';
 
 export interface IEcho {
   id?: number;
-  name?: string | null;
+  name?: string;
   description?: string | null;
   created?: dayjs.Dayjs | null;
-  actors?: IActor[] | null;
+  authors?: IAuthor[] | null;
 }
 
 export class Echo implements IEcho {
   constructor(
     public id?: number,
-    public name?: string | null,
+    public name?: string,
     public description?: string | null,
     public created?: dayjs.Dayjs | null,
-    public actors?: IActor[] | null
+    public authors?: IAuthor[] | null
   ) {}
 }
 

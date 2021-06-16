@@ -3,7 +3,8 @@
   "fields": [
     {
       "fieldName": "name",
-      "fieldType": "String"
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "description",
@@ -17,10 +18,9 @@
   "relationships": [
     {
       "relationshipType": "many-to-many",
-      "otherEntityName": "actor",
+      "otherEntityName": "author",
       "otherEntityRelationshipName": "echo",
-      "relationshipName": "actor",
-      "otherEntityField": "name",
+      "relationshipName": "author",
       "ownerSide": false
     }
   ],
@@ -32,7 +32,7 @@
   "fluentMethods": true,
   "readOnly": false,
   "embedded": false,
-  "applications": ["testProject"],
+  "applications": ["testproject"],
   "searchEngine": "elasticsearch",
   "changelogDate": "20210610195223"
 }

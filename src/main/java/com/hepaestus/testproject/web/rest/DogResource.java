@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -51,7 +53,7 @@ public class DogResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/dogs")
-    public ResponseEntity<DogDTO> createDog(@RequestBody DogDTO dogDTO) throws URISyntaxException {
+    public ResponseEntity<DogDTO> createDog(@Valid @RequestBody DogDTO dogDTO) throws URISyntaxException {
         log.debug("REST request to save Dog : {}", dogDTO);
         if (dogDTO.getId() != null) {
             throw new BadRequestAlertException("A new dog cannot already have an ID", ENTITY_NAME, "idexists");
@@ -74,7 +76,7 @@ public class DogResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/dogs/{id}")
-    public ResponseEntity<DogDTO> updateDog(@PathVariable(value = "id", required = false) final Long id, @RequestBody DogDTO dogDTO)
+    public ResponseEntity<DogDTO> updateDog(@PathVariable(value = "id", required = false) final Long id, @Valid @RequestBody DogDTO dogDTO)
         throws URISyntaxException {
         log.debug("REST request to update Dog : {}, {}", id, dogDTO);
         if (dogDTO.getId() == null) {
@@ -107,8 +109,10 @@ public class DogResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PatchMapping(value = "/dogs/{id}", consumes = "application/merge-patch+json")
-    public ResponseEntity<DogDTO> partialUpdateDog(@PathVariable(value = "id", required = false) final Long id, @RequestBody DogDTO dogDTO)
-        throws URISyntaxException {
+    public ResponseEntity<DogDTO> partialUpdateDog(
+        @PathVariable(value = "id", required = false) final Long id,
+        @NotNull @RequestBody DogDTO dogDTO
+    ) throws URISyntaxException {
         log.debug("REST request to partial update Dog partially : {}, {}", id, dogDTO);
         if (dogDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
@@ -132,10 +136,15 @@ public class DogResource {
     /**
      * {@code GET  /dogs} : get all the dogs.
      *
+     * @param filter the filter of the request.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of dogs in body.
      */
     @GetMapping("/dogs")
-    public List<DogDTO> getAllDogs() {
+    public List<DogDTO> getAllDogs(@RequestParam(required = false) String filter) {
+        if ("author-is-null".equals(filter)) {
+            log.debug("REST request to get all Dogs where author is null");
+            return dogService.findAllWhereAuthorIsNull();
+        }
         log.debug("REST request to get all Dogs");
         return dogService.findAll();
     }

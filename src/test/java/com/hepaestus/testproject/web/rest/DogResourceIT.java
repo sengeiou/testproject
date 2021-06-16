@@ -152,6 +152,24 @@ class DogResourceIT {
 
     @Test
     @Transactional
+    void checkNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = dogRepository.findAll().size();
+        // set the field null
+        dog.setName(null);
+
+        // Create the Dog, which fails.
+        DogDTO dogDTO = dogMapper.toDto(dog);
+
+        restDogMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(dogDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Dog> dogList = dogRepository.findAll();
+        assertThat(dogList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     void getAllDogs() throws Exception {
         // Initialize the database
         dogRepository.saveAndFlush(dog);

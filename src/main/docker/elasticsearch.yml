@@ -4,7 +4,7 @@ services:
   testproject-elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.9.3
     # volumes:
-    #   - ~/volumes/jhipster/testProject/elasticsearch/:/usr/share/elasticsearch/data/
+    #   - ~/volumes/jhipster/testproject/elasticsearch/:/usr/share/elasticsearch/data/
     # If you want to expose these ports outside your dev PC,
     # remove the "127.0.0.1:" prefix
     ports:

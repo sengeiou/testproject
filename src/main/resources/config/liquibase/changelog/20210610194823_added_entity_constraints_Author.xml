@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity Author.
+    -->
+    <changeSet id="20210610194823-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="dog_id"
+                                 baseTableName="author"
+                                 constraintName="fk_author__dog_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="dog"/>
+
+        <addForeignKeyConstraint baseColumnNames="author_id"
+                                 baseTableName="rel_author__echo"
+                                 constraintName="fk_rel_author__echo__author_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="author"/>
+
+        <addForeignKeyConstraint baseColumnNames="echo_id"
+                                 baseTableName="rel_author__echo"
+                                 constraintName="fk_rel_author__echo__echo_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="echo"/>
+    </changeSet>
+</databaseChangeLog>

@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
   <div class="col-8">
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2 id="jhi-book-heading" data-cy="BookCreateUpdateHeading" jhiTranslate="testProjectApp.book.home.createOrEditLabel">
+      <h2 id="jhi-book-heading" data-cy="BookCreateUpdateHeading" jhiTranslate="testprojectApp.book.home.createOrEditLabel">
         Create or edit a Book
       </h2>
 
@@ -14,7 +14,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" jhiTranslate="testProjectApp.book.name" for="field_name">Name</label>
+          <label class="form-control-label" jhiTranslate="testprojectApp.book.name" for="field_name">Name</label>
           <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
           <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
             <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required" jhiTranslate="entity.validation.required">
@@ -24,7 +24,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" jhiTranslate="testProjectApp.book.created" for="field_created">Created</label>
+          <label class="form-control-label" jhiTranslate="testprojectApp.book.created" for="field_created">Created</label>
           <div class="input-group">
             <input
               id="field_created"
@@ -43,7 +43,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" jhiTranslate="testProjectApp.book.description" for="field_description">Description</label>
+          <label class="form-control-label" jhiTranslate="testprojectApp.book.description" for="field_description">Description</label>
           <input
             type="text"
             class="form-control"
@@ -52,6 +52,19 @@
             data-cy="description"
             formControlName="description"
           />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="testprojectApp.book.author" for="field_author">Author</label>
+          <select class="form-control" id="field_author" data-cy="author" name="author" formControlName="author">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="authorOption.id === editForm.get('author')!.value?.id ? editForm.get('author')!.value : authorOption"
+              *ngFor="let authorOption of authorsSharedCollection; trackBy: trackAuthorById"
+            >
+              {{ authorOption.name }}
+            </option>
+          </select>
         </div>
       </div>
 

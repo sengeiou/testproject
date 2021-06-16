@@ -3,7 +3,8 @@
   "fields": [
     {
       "fieldName": "name",
-      "fieldType": "String"
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "description",
@@ -17,17 +18,18 @@
   "relationships": [
     {
       "relationshipType": "one-to-many",
-      "otherEntityName": "card",
+      "otherEntityName": "car",
       "otherEntityRelationshipName": "dog",
       "relationshipName": "card",
       "otherEntityField": "name"
     },
     {
-      "relationshipType": "many-to-one",
-      "otherEntityName": "actor",
+      "relationshipType": "one-to-one",
+      "otherEntityName": "author",
       "otherEntityRelationshipName": "dog",
-      "relationshipName": "actor",
-      "otherEntityField": "name"
+      "relationshipName": "author",
+      "otherEntityField": "name",
+      "ownerSide": false
     }
   ],
   "entityTableName": "dog",
@@ -38,7 +40,7 @@
   "fluentMethods": true,
   "readOnly": false,
   "embedded": false,
-  "applications": ["testProject"],
+  "applications": ["testproject"],
   "searchEngine": "elasticsearch",
   "changelogDate": "20210610195123"
 }

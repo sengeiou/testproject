@@ -1,6 +1,6 @@
 package com.hepaestus.testproject;
 
-import com.hepaestus.testproject.TestProjectApp;
+import com.hepaestus.testproject.TestprojectApp;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -12,6 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@SpringBootTest(classes = TestProjectApp.class)
+@SpringBootTest(classes = TestprojectApp.class)
 public @interface IntegrationTest {
 }

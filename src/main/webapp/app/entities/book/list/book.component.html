@@ -1,11 +1,11 @@
 <div>
   <h2 id="page-heading" data-cy="BookHeading">
-    <span jhiTranslate="testProjectApp.book.home.title">Books</span>
+    <span jhiTranslate="testprojectApp.book.home.title">Books</span>
 
     <div class="d-flex justify-content-end">
       <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-        <span jhiTranslate="testProjectApp.book.home.refreshListLabel">Refresh List</span>
+        <span jhiTranslate="testprojectApp.book.home.refreshListLabel">Refresh List</span>
       </button>
 
       <button
@@ -15,7 +15,7 @@
         [routerLink]="['/book/new']"
       >
         <fa-icon icon="plus"></fa-icon>
-        <span class="hidden-sm-down" jhiTranslate="testProjectApp.book.home.createLabel"> Create a new Book </span>
+        <span class="hidden-sm-down" jhiTranslate="testprojectApp.book.home.createLabel"> Create a new Book </span>
       </button>
     </div>
   </h2>
@@ -34,7 +34,7 @@
             [(ngModel)]="currentSearch"
             id="currentSearch"
             name="currentSearch"
-            placeholder="{{ 'testProjectApp.book.home.search' | translate }}"
+            placeholder="{{ 'testprojectApp.book.home.search' | translate }}"
           />
 
           <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
@@ -50,7 +50,7 @@
   </div>
 
   <div class="alert alert-warning" id="no-result" *ngIf="books?.length === 0">
-    <span jhiTranslate="testProjectApp.book.home.notFound">No books found</span>
+    <span jhiTranslate="testprojectApp.book.home.notFound">No books found</span>
   </div>
 
   <div class="table-responsive" id="entities" *ngIf="books && books.length > 0">
@@ -58,9 +58,10 @@
       <thead>
         <tr>
           <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
-          <th scope="col"><span jhiTranslate="testProjectApp.book.name">Name</span></th>
-          <th scope="col"><span jhiTranslate="testProjectApp.book.created">Created</span></th>
-          <th scope="col"><span jhiTranslate="testProjectApp.book.description">Description</span></th>
+          <th scope="col"><span jhiTranslate="testprojectApp.book.name">Name</span></th>
+          <th scope="col"><span jhiTranslate="testprojectApp.book.created">Created</span></th>
+          <th scope="col"><span jhiTranslate="testprojectApp.book.description">Description</span></th>
+          <th scope="col"><span jhiTranslate="testprojectApp.book.author">Author</span></th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -72,6 +73,11 @@
           <td>{{ book.name }}</td>
           <td>{{ book.created | formatMediumDate }}</td>
           <td>{{ book.description }}</td>
+          <td>
+            <div *ngIf="book.author">
+              <a [routerLink]="['/author', book.author?.id, 'view']">{{ book.author?.name }}</a>
+            </div>
+          </td>
           <td class="text-right">
             <div class="btn-group">
               <button type="submit" [routerLink]="['/book', book.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">

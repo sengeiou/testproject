@@ -3,6 +3,7 @@ package com.hepaestus.testproject.service.dto;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
+import javax.validation.constraints.*;
 
 /**
  * A DTO for the {@link com.hepaestus.testproject.domain.Dog} entity.
@@ -11,13 +12,12 @@ public class DogDTO implements Serializable {
 
     private Long id;
 
+    @NotNull
     private String name;
 
     private String description;
 
     private LocalDate created;
-
-    private ActorDTO actor;
 
     public Long getId() {
         return id;
@@ -51,14 +51,6 @@ public class DogDTO implements Serializable {
         this.created = created;
     }
 
-    public ActorDTO getActor() {
-        return actor;
-    }
-
-    public void setActor(ActorDTO actor) {
-        this.actor = actor;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -88,7 +80,6 @@ public class DogDTO implements Serializable {
             ", name='" + getName() + "'" +
             ", description='" + getDescription() + "'" +
             ", created='" + getCreated() + "'" +
-            ", actor=" + getActor() +
             "}";
     }
 }

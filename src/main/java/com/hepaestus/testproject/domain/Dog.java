@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.FieldType;
@@ -25,7 +26,8 @@ public class Dog implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @NotNull
+    @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "description")
@@ -37,11 +39,11 @@ public class Dog implements Serializable {
     @OneToMany(mappedBy = "dog")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "dog" }, allowSetters = true)
-    private Set<Card> cards = new HashSet<>();
+    private Set<Car> cards = new HashSet<>();
 
-    @ManyToOne
-    @JsonIgnoreProperties(value = { "book", "dogs", "echoes" }, allowSetters = true)
-    private Actor actor;
+    @JsonIgnoreProperties(value = { "dog", "books", "echoes" }, allowSetters = true)
+    @OneToOne(mappedBy = "dog")
+    private Author author;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -96,48 +98,54 @@ public class Dog implements Serializable {
         this.created = created;
     }
 
-    public Set<Card> getCards() {
+    public Set<Car> getCards() {
         return this.cards;
     }
 
-    public Dog cards(Set<Card> cards) {
-        this.setCards(cards);
+    public Dog cards(Set<Car> cars) {
+        this.setCards(cars);
         return this;
     }
 
-    public Dog addCard(Card card) {
-        this.cards.add(card);
-        card.setDog(this);
+    public Dog addCard(Car car) {
+        this.cards.add(car);
+        car.setDog(this);
         return this;
     }
 
-    public Dog removeCard(Card card) {
-        this.cards.remove(card);
-        card.setDog(null);
+    public Dog removeCard(Car car) {
+        this.cards.remove(car);
+        car.setDog(null);
         return this;
     }
 
-    public void setCards(Set<Card> cards) {
+    public void setCards(Set<Car> cars) {
         if (this.cards != null) {
             this.cards.forEach(i -> i.setDog(null));
         }
-        if (cards != null) {
-            cards.forEach(i -> i.setDog(this));
+        if (cars != null) {
+            cars.forEach(i -> i.setDog(this));
         }
-        this.cards = cards;
+        this.cards = cars;
     }
 
-    public Actor getActor() {
-        return this.actor;
+    public Author getAuthor() {
+        return this.author;
     }
 
-    public Dog actor(Actor actor) {
-        this.setActor(actor);
+    public Dog author(Author author) {
+        this.setAuthor(author);
         return this;
     }
 
-    public void setActor(Actor actor) {
-        this.actor = actor;
+    public void setAuthor(Author author) {
+        if (this.author != null) {
+            this.author.setDog(null);
+        }
+        if (author != null) {
+            author.setDog(this);
+        }
+        this.author = author;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

@@ -1,8 +1,8 @@
 {
-  "name": "test-project",
+  "name": "testproject",
   "version": "0.0.1-SNAPSHOT",
   "private": true,
-  "description": "Description for testProject",
+  "description": "Description for testproject",
   "license": "UNLICENSED",
   "scripts": {
     "prettier:check": "prettier --check \"{,src/**/,webpack/}*.{md,json,yml,html,js,ts,tsx,css,scss,java}\"",

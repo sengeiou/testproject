@@ -152,6 +152,24 @@ class EchoResourceIT {
 
     @Test
     @Transactional
+    void checkNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = echoRepository.findAll().size();
+        // set the field null
+        echo.setName(null);
+
+        // Create the Echo, which fails.
+        EchoDTO echoDTO = echoMapper.toDto(echo);
+
+        restEchoMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(echoDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Echo> echoList = echoRepository.findAll();
+        assertThat(echoList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     void getAllEchoes() throws Exception {
         // Initialize the database
         echoRepository.saveAndFlush(echo);

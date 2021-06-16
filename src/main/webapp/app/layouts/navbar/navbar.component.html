@@ -1,7 +1,7 @@
 <nav data-cy="navbar" class="navbar navbar-dark navbar-expand-md bg-dark">
   <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
     <span class="logo-img"></span>
-    <span jhiTranslate="global.title" class="navbar-title">TestProject</span>
+    <span jhiTranslate="global.title" class="navbar-title">Testproject</span>
     <span class="navbar-version">{{ version }}</span>
   </a>
   <a
@@ -45,13 +45,13 @@
           <li>
             <a
               class="dropdown-item"
-              routerLink="actor"
+              routerLink="author"
               routerLinkActive="active"
               [routerLinkActiveOptions]="{ exact: true }"
               (click)="collapseNavbar()"
             >
               <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.actor">Actor</span>
+              <span jhiTranslate="global.menu.entities.author">Author</span>
             </a>
           </li>
           <li>
@@ -69,13 +69,13 @@
           <li>
             <a
               class="dropdown-item"
-              routerLink="card"
+              routerLink="car"
               routerLinkActive="active"
               [routerLinkActiveOptions]="{ exact: true }"
               (click)="collapseNavbar()"
             >
               <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.card">Card</span>
+              <span jhiTranslate="global.menu.entities.car">Car</span>
             </a>
           </li>
           <li>

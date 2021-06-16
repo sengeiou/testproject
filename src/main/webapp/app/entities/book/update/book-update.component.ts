@@ -3,10 +3,12 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { finalize, map } from 'rxjs/operators';
 
 import { IBook, Book } from '../book.model';
 import { BookService } from '../service/book.service';
+import { IAuthor } from 'app/entities/author/author.model';
+import { AuthorService } from 'app/entities/author/service/author.service';
 
 @Component({
   selector: 'jhi-book-update',
@@ -15,18 +17,28 @@ import { BookService } from '../service/book.service';
 export class BookUpdateComponent implements OnInit {
   isSaving = false;
 
+  authorsSharedCollection: IAuthor[] = [];
+
   editForm = this.fb.group({
     id: [],
     name: [null, [Validators.required]],
     created: [],
     description: [],
+    author: [],
   });
 
-  constructor(protected bookService: BookService, protected activatedRoute: ActivatedRoute, protected fb: FormBuilder) {}
+  constructor(
+    protected bookService: BookService,
+    protected authorService: AuthorService,
+    protected activatedRoute: ActivatedRoute,
+    protected fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ book }) => {
       this.updateForm(book);
+
+      this.loadRelationshipsOptions();
     });
   }
 
@@ -42,6 +54,10 @@ export class BookUpdateComponent implements OnInit {
     } else {
       this.subscribeToSaveResponse(this.bookService.create(book));
     }
+  }
+
+  trackAuthorById(index: number, item: IAuthor): number {
+    return item.id!;
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IBook>>): void {
@@ -69,7 +85,18 @@ export class BookUpdateComponent implements OnInit {
       name: book.name,
       created: book.created,
       description: book.description,
+      author: book.author,
     });
+
+    this.authorsSharedCollection = this.authorService.addAuthorToCollectionIfMissing(this.authorsSharedCollection, book.author);
+  }
+
+  protected loadRelationshipsOptions(): void {
+    this.authorService
+      .query()
+      .pipe(map((res: HttpResponse<IAuthor[]>) => res.body ?? []))
+      .pipe(map((authors: IAuthor[]) => this.authorService.addAuthorToCollectionIfMissing(authors, this.editForm.get('author')!.value)))
+      .subscribe((authors: IAuthor[]) => (this.authorsSharedCollection = authors));
   }
 
   protected createFromForm(): IBook {
@@ -79,6 +106,7 @@ export class BookUpdateComponent implements OnInit {
       name: this.editForm.get(['name'])!.value,
       created: this.editForm.get(['created'])!.value,
       description: this.editForm.get(['description'])!.value,
+      author: this.editForm.get(['author'])!.value,
     };
   }
 }

@@ -1,0 +1,64 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="author">
+      <h2 data-cy="authorDetailsHeading"><span jhiTranslate="testprojectApp.author.detail.title">Author</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ author.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="testprojectApp.author.name">Name</span></dt>
+        <dd>
+          <span>{{ author.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="testprojectApp.author.firstName">First Name</span></dt>
+        <dd>
+          <span>{{ author.firstName }}</span>
+        </dd>
+        <dt><span jhiTranslate="testprojectApp.author.lastName">Last Name</span></dt>
+        <dd>
+          <span>{{ author.lastName }}</span>
+        </dd>
+        <dt><span jhiTranslate="testprojectApp.author.type">Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'testprojectApp.AddressType.' + author.type }}">{{ author.type }}</span>
+        </dd>
+        <dt><span jhiTranslate="testprojectApp.author.dog">Dog</span></dt>
+        <dd>
+          <div *ngIf="author.dog">
+            <a [routerLink]="['/dog', author.dog?.id, 'view']">{{ author.dog?.name }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="testprojectApp.author.echo">Echo</span></dt>
+        <dd>
+          <span *ngFor="let echo of author.echoes; let last = last">
+            <a [routerLink]="['/echo', echo?.id, 'view']">{{ echo.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span jhiTranslate="testprojectApp.author.book">Book</span></dt>
+        <dd>
+          <span *ngFor="let book of author.books; let last = last">
+            <a [routerLink]="['/book', book?.id, 'view']">{{ book.name }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/author', author.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

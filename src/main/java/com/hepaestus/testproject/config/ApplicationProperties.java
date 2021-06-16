@@ -3,7 +3,7 @@ package com.hepaestus.testproject.config;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * Properties specific to Test Project.
+ * Properties specific to Testproject.
  * <p>
  * Properties are configured in the {@code application.yml} file.
  * See {@link tech.jhipster.config.JHipsterProperties} for a good example.

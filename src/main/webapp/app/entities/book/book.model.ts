@@ -1,12 +1,12 @@
 import * as dayjs from 'dayjs';
-import { IActor } from 'app/entities/actor/actor.model';
+import { IAuthor } from 'app/entities/author/author.model';
 
 export interface IBook {
   id?: number;
   name?: string;
   created?: dayjs.Dayjs | null;
   description?: string | null;
-  actor?: IActor | null;
+  author?: IAuthor | null;
 }
 
 export class Book implements IBook {
@@ -15,7 +15,7 @@ export class Book implements IBook {
     public name?: string,
     public created?: dayjs.Dayjs | null,
     public description?: string | null,
-    public actor?: IActor | null
+    public author?: IAuthor | null
   ) {}
 }
 

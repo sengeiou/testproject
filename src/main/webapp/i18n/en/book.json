@@ -1,5 +1,5 @@
 {
-  "testProjectApp": {
+  "testprojectApp": {
     "book": {
       "home": {
         "title": "Books",
@@ -22,7 +22,7 @@
       "name": "Name",
       "created": "Created",
       "description": "Description",
-      "actor": "Actor"
+      "author": "Author"
     }
   }
 }

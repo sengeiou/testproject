@@ -6,10 +6,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.hepaestus.testproject</groupId>
-    <artifactId>test-project</artifactId>
+    <artifactId>testproject</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>Test Project</name>
+    <name>Testproject</name>
 
     <repositories>
         <!-- jhipster-needle-maven-repository -->
@@ -33,7 +33,7 @@
         <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
-        <start-class>com.hepaestus.testproject.TestProjectApp</start-class>
+        <start-class>com.hepaestus.testproject.TestprojectApp</start-class>
         <argLine>-Djava.security.egd=file:/dev/./urandom -Xmx256m</argLine>
         <m2e.apt.activation>jdt_apt</m2e.apt.activation>
         <run.addResources>false</run.addResources>
@@ -621,10 +621,10 @@
                         <changeLogFile>${project.basedir}/src/main/resources/config/liquibase/master.xml</changeLogFile>
                         <diffChangeLogFile>${project.basedir}/src/main/resources/config/liquibase/changelog/${maven.build.timestamp}_changelog.xml</diffChangeLogFile>
                         <driver>com.mysql.cj.jdbc.Driver</driver>
-                        <url>jdbc:mysql://localhost:3306/testProject</url>
-                        <defaultSchemaName>testProject</defaultSchemaName>
-                        <username>root</username>
-                        <password></password>
+                        <url>jdbc:mysql://localhost:3306/testproject</url>
+                        <defaultSchemaName>testproject</defaultSchemaName>
+                        <username>testproject</username>
+                        <password>testProject</password>
                         <referenceUrl>hibernate:spring:com.hepaestus.testproject.domain?dialect=org.hibernate.dialect.MySQL8Dialect&amp;hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&amp;hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy</referenceUrl>
                         <verbose>true</verbose>
                         <logging>debug</logging>

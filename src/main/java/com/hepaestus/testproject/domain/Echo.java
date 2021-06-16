@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.FieldType;
@@ -25,7 +26,8 @@ public class Echo implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @NotNull
+    @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "description")
@@ -36,8 +38,8 @@ public class Echo implements Serializable {
 
     @ManyToMany(mappedBy = "echoes")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "book", "dogs", "echoes" }, allowSetters = true)
-    private Set<Actor> actors = new HashSet<>();
+    @JsonIgnoreProperties(value = { "dog", "books", "echoes" }, allowSetters = true)
+    private Set<Author> authors = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -92,35 +94,35 @@ public class Echo implements Serializable {
         this.created = created;
     }
 
-    public Set<Actor> getActors() {
-        return this.actors;
+    public Set<Author> getAuthors() {
+        return this.authors;
     }
 
-    public Echo actors(Set<Actor> actors) {
-        this.setActors(actors);
+    public Echo authors(Set<Author> authors) {
+        this.setAuthors(authors);
         return this;
     }
 
-    public Echo addActor(Actor actor) {
-        this.actors.add(actor);
-        actor.getEchoes().add(this);
+    public Echo addAuthor(Author author) {
+        this.authors.add(author);
+        author.getEchoes().add(this);
         return this;
     }
 
-    public Echo removeActor(Actor actor) {
-        this.actors.remove(actor);
-        actor.getEchoes().remove(this);
+    public Echo removeAuthor(Author author) {
+        this.authors.remove(author);
+        author.getEchoes().remove(this);
         return this;
     }
 
-    public void setActors(Set<Actor> actors) {
-        if (this.actors != null) {
-            this.actors.forEach(i -> i.removeEcho(this));
+    public void setAuthors(Set<Author> authors) {
+        if (this.authors != null) {
+            this.authors.forEach(i -> i.removeEcho(this));
         }
-        if (actors != null) {
-            actors.forEach(i -> i.addEcho(this));
+        if (authors != null) {
+            authors.forEach(i -> i.addEcho(this));
         }
-        this.actors = actors;
+        this.authors = authors;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

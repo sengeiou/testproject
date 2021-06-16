@@ -9,6 +9,8 @@ import { of, Subject } from 'rxjs';
 
 import { BookService } from '../service/book.service';
 import { IBook, Book } from '../book.model';
+import { IAuthor } from 'app/entities/author/author.model';
+import { AuthorService } from 'app/entities/author/service/author.service';
 
 import { BookUpdateComponent } from './book-update.component';
 
@@ -18,6 +20,7 @@ describe('Component Tests', () => {
     let fixture: ComponentFixture<BookUpdateComponent>;
     let activatedRoute: ActivatedRoute;
     let bookService: BookService;
+    let authorService: AuthorService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
@@ -31,18 +34,41 @@ describe('Component Tests', () => {
       fixture = TestBed.createComponent(BookUpdateComponent);
       activatedRoute = TestBed.inject(ActivatedRoute);
       bookService = TestBed.inject(BookService);
+      authorService = TestBed.inject(AuthorService);
 
       comp = fixture.componentInstance;
     });
 
     describe('ngOnInit', () => {
+      it('Should call Author query and add missing value', () => {
+        const book: IBook = { id: 456 };
+        const author: IAuthor = { id: 86583 };
+        book.author = author;
+
+        const authorCollection: IAuthor[] = [{ id: 53489 }];
+        spyOn(authorService, 'query').and.returnValue(of(new HttpResponse({ body: authorCollection })));
+        const additionalAuthors = [author];
+        const expectedCollection: IAuthor[] = [...additionalAuthors, ...authorCollection];
+        spyOn(authorService, 'addAuthorToCollectionIfMissing').and.returnValue(expectedCollection);
+
+        activatedRoute.data = of({ book });
+        comp.ngOnInit();
+
+        expect(authorService.query).toHaveBeenCalled();
+        expect(authorService.addAuthorToCollectionIfMissing).toHaveBeenCalledWith(authorCollection, ...additionalAuthors);
+        expect(comp.authorsSharedCollection).toEqual(expectedCollection);
+      });
+
       it('Should update editForm', () => {
         const book: IBook = { id: 456 };
+        const author: IAuthor = { id: 51997 };
+        book.author = author;
 
         activatedRoute.data = of({ book });
         comp.ngOnInit();
 
         expect(comp.editForm.value).toEqual(expect.objectContaining(book));
+        expect(comp.authorsSharedCollection).toContain(author);
       });
     });
 
@@ -107,6 +133,16 @@ describe('Component Tests', () => {
         expect(bookService.update).toHaveBeenCalledWith(book);
         expect(comp.isSaving).toEqual(false);
         expect(comp.previousState).not.toHaveBeenCalled();
+      });
+    });
+
+    describe('Tracking relationships identifiers', () => {
+      describe('trackAuthorById', () => {
+        it('Should return tracked Author primary key', () => {
+          const entity = { id: 123 };
+          const trackResult = comp.trackAuthorById(0, entity);
+          expect(trackResult).toEqual(entity.id);
+        });
       });
     });
   });

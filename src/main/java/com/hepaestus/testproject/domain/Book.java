@@ -34,9 +34,9 @@ public class Book implements Serializable {
     @Column(name = "description")
     private String description;
 
-    @JsonIgnoreProperties(value = { "book", "dogs", "echoes" }, allowSetters = true)
-    @OneToOne(mappedBy = "book")
-    private Actor actor;
+    @ManyToOne
+    @JsonIgnoreProperties(value = { "dog", "books", "echoes" }, allowSetters = true)
+    private Author author;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -91,23 +91,17 @@ public class Book implements Serializable {
         this.description = description;
     }
 
-    public Actor getActor() {
-        return this.actor;
+    public Author getAuthor() {
+        return this.author;
     }
 
-    public Book actor(Actor actor) {
-        this.setActor(actor);
+    public Book author(Author author) {
+        this.setAuthor(author);
         return this;
     }
 
-    public void setActor(Actor actor) {
-        if (this.actor != null) {
-            this.actor.setBook(null);
-        }
-        if (actor != null) {
-            actor.setBook(this);
-        }
-        this.actor = actor;
+    public void setAuthor(Author author) {
+        this.author = author;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

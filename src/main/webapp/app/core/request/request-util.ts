@@ -16,6 +16,7 @@ export const createRequestOption = (req?: any): HttpParams => {
       });
     }
   }
-
+  console.log('++++ REQUEST OPTIONS:');
+  console.table(options);
   return options;
 };

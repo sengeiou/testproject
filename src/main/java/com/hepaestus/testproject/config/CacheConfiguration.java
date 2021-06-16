@@ -51,15 +51,15 @@ public class CacheConfiguration {
             createCache(cm, com.hepaestus.testproject.domain.User.class.getName());
             createCache(cm, com.hepaestus.testproject.domain.Authority.class.getName());
             createCache(cm, com.hepaestus.testproject.domain.User.class.getName() + ".authorities");
-            createCache(cm, com.hepaestus.testproject.domain.Actor.class.getName());
-            createCache(cm, com.hepaestus.testproject.domain.Actor.class.getName() + ".dogs");
-            createCache(cm, com.hepaestus.testproject.domain.Actor.class.getName() + ".echoes");
+            createCache(cm, com.hepaestus.testproject.domain.Author.class.getName());
+            createCache(cm, com.hepaestus.testproject.domain.Author.class.getName() + ".books");
+            createCache(cm, com.hepaestus.testproject.domain.Author.class.getName() + ".echoes");
             createCache(cm, com.hepaestus.testproject.domain.Book.class.getName());
-            createCache(cm, com.hepaestus.testproject.domain.Card.class.getName());
+            createCache(cm, com.hepaestus.testproject.domain.Car.class.getName());
             createCache(cm, com.hepaestus.testproject.domain.Dog.class.getName());
             createCache(cm, com.hepaestus.testproject.domain.Dog.class.getName() + ".cards");
             createCache(cm, com.hepaestus.testproject.domain.Echo.class.getName());
-            createCache(cm, com.hepaestus.testproject.domain.Echo.class.getName() + ".actors");
+            createCache(cm, com.hepaestus.testproject.domain.Echo.class.getName() + ".authors");
             // jhipster-needle-ehcache-add-entry
         };
     }

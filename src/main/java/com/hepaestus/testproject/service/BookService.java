@@ -93,20 +93,6 @@ public class BookService {
     }
 
     /**
-     *  Get all the books where Actor is {@code null}.
-     *  @return the list of entities.
-     */
-    @Transactional(readOnly = true)
-    public List<BookDTO> findAllWhereActorIsNull() {
-        log.debug("Request to get all books where Actor is null");
-        return StreamSupport
-            .stream(bookRepository.findAll().spliterator(), false)
-            .filter(book -> book.getActor() == null)
-            .map(bookMapper::toDto)
-            .collect(Collectors.toCollection(LinkedList::new));
-    }
-
-    /**
      * Get one book by id.
      *
      * @param id the id of the entity.
