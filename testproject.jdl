@@ -1,0 +1,103 @@
+application {
+  config {
+    applicationType monolith
+    authenticationType jwt
+    baseName testproject
+    blueprints []
+    buildTool maven
+    cacheProvider ehcache
+    clientFramework angularX
+    clientPackageManager npm
+    clientTheme lumen
+    clientThemeVariant dark
+    creationTimestamp 1623354443010
+    databaseType sql
+    devDatabaseType mysql
+    dtoSuffix DTO
+    enableHibernateCache true
+    enableSwaggerCodegen false
+    enableTranslation true
+    jhiPrefix jhi
+    jhipsterVersion "7.0.1"
+    jwtSecretKey "OTM2MjAxNjYzYjU0ZDUyNjQxNmIzNmZmM2VmODc4ZmI2MTM0M2QyZWJmZDI1YzdlNzQxYzgzZWMzNjQxZjQxYTJjNWNjNWY1ODU4N2UyNWFkYTZjZTQxMDlhNzA2ZmUxNWZmMTAwMDliNGY2Nzg0MzQ1ZjliYjQ4NDE3ZmQ5MWU="
+    languages [en, es]
+    messageBroker false
+    nativeLanguage en
+    otherModules []
+    packageName com.hepaestus.testproject
+    prodDatabaseType mysql
+    reactive false
+    searchEngine elasticsearch
+    serverPort 8080
+    serviceDiscoveryType eureka
+    skipClient false
+    skipServer false
+    skipUserManagement false
+    testFrameworks []
+    websocket false
+    withAdminUi true
+  }
+
+  entities Author, Book, Car, Dog, Echo
+}
+
+entity Author {
+  name String
+  firstName String
+  lastName String
+  type AddressType
+}
+entity Book {
+  name String required
+  created LocalDate
+  description String
+}
+entity Car {
+  name String required
+  title String
+  date LocalDate
+  type CustomerType
+}
+entity Dog {
+  name String required
+  description String
+  created LocalDate
+}
+entity Echo {
+  name String required
+  description String
+  created LocalDate
+}
+entity Friend {
+  name String required
+  description String
+  created LocalDate
+}
+enum AddressType {
+  DEFAULT,
+  HOME,
+  BUSINESS
+}
+enum CustomerType {
+  DEFAULT,
+  REGULAR,
+  ARTIST,
+  DESIGNER,
+  CORPORATE,
+  ADMIN
+}
+
+relationship OneToOne {
+  Author{dog(name)} to Dog{author(name)}
+}
+relationship OneToMany {
+  Author{book(name)} to Book{author(name)}
+  Dog{car(name)} to Car{dog}
+}
+relationship ManyToMany {
+  Author{echo} to Echo{author}
+}
+
+dto Author, Book, Car, Dog, Echo with mapstruct
+service Author, Book, Car, Dog, Echo with serviceClass
+search Author, Book, Car, Dog, Echo with elasticsearch
